@@ -11,10 +11,9 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
-
-
 
 @Entity
 @Table(name="contactos")
@@ -24,14 +23,24 @@ public class Contact {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotNull
+	@Size(min=3, max=20, message = "Acepto nombres con más de 3 caracteres" )
 	private String nombre;
 	
+	@NotNull
+	@Size(min=3, max=20, message = "Acepto apellidos con más de 3 caracteres" )
 	private String apellidoPaterno;
 
+	@NotNull
+	@Size(min=3, max=20, message = "Acepto apellidos con más de 3 caracteres" )
 	private String apellidoMaterno;
 	
+	@NotNull
+	@Size(min=3, max=50, message = "Acepto dirección con más de 3 caracteres" )
 	private String direccion;
 	
+	@NotNull
+	@Size(min=8, max=15, message = "Acepto teléfonos con más de 8 dígitos" )
 	private String telefono;
 		
 	//updatable= false fecha en que se creó y no se va a poder modificar, a nivel de BD
@@ -46,12 +55,12 @@ public class Contact {
 	public Contact() {
 		super();
 	}
-
-	public Contact(String nombre,
-			String apellidoPaterno,
-			String apellidoMaterno,
-			String direccion,
-			String telefono) {
+	
+	public Contact(@NotNull @Size(min = 3, max = 20, message = "Acepto nombres con más de 3 caracteres") String nombre,
+			@NotNull @Size(min = 3, max = 20, message = "Acepto apellidos con más de 3 caracteres") String apellidoPaterno,
+			@NotNull @Size(min = 3, max = 20, message = "Acepto apellidos con más de 3 caracteres") String apellidoMaterno,
+			@NotNull @Size(min = 3, max = 50, message = "Acepto dirección con más de 3 caracteres") String direccion,
+			@NotNull @Size(min = 8, max = 15, message = "Acepto teléfonos con más de 8 dígitos") String telefono) {
 		super();
 		this.nombre = nombre;
 		this.apellidoPaterno = apellidoPaterno;
@@ -124,13 +133,6 @@ public class Contact {
 		this.updatedAt = updatedAt;
 	}
 
-	@Override
-	public String toString() {
-		return "Contacto [id=" + id + ", nombre=" + nombre + ", apellidoPaterno=" + apellidoPaterno
-				+ ", apellidoMaterno=" + apellidoMaterno + ", direccion=" + direccion + ", telefono=" + telefono
-				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
-	} 
-	
 	//PrePersist crea por nosotros antes de la persistencia
 	@PrePersist
 	protected void onCreate(){

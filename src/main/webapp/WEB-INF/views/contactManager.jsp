@@ -107,7 +107,7 @@
 						<td><c:out value="${contacto.apellidoMaterno}"></c:out></td>
 						<td><c:out value="${contacto.direccion}"></c:out></td>
 						<td><c:out value="${contacto.telefono}"></c:out></td>
-						<td><a class="btn btn-danger" href="contactManager/eliminar/${contacto.id}"
+						<td><a class="btn btn-danger" href="contactManager/deleteContact/${contacto.id}"
 							   role="button" onclick="delete()">Eliminar</a></td>
 					</tr>
 				</c:forEach>
